@@ -1,5 +1,7 @@
 # Stock Market and Sentiment Analysis
 Repositori ini berisi file dan konfigurasi yang diperlukan untuk menyiapkan saluran ETL (Ekstrak, Transformasi, Muat) end-to-end untuk menganalisis data pasar saham dan sentimen berita.
+link blog: 
+link video: 
 
 ## Struktur Folder
 Repositori ini terdiri dari folder dan file berikut:
