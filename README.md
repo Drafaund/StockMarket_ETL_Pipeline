@@ -15,14 +15,14 @@ Repositori ini terdiri dari folder dan file berikut:
 9. `README.md`: File ini, yang menyediakan dokumentasi untuk proyek ini.
 10. `requirements.txt`: File yang mencantumkan dependensi Python yang diperlukan untuk saluran ETL.
 
-## Prasyarat
+## Requirements
 Sebelum Anda dapat menyiapkan saluran ETL, pastikan Anda memiliki perangkat berikut terinstal di sistem Anda:
 
 - Docker
 - Docker Compose
 - Python 3.x
 
-## Memulai
+## Getting Started
 1. Klon repositori:
    ```
    git clone https://github.com/your-username/stockmarket-etl-pipeline.git
@@ -67,11 +67,3 @@ Saluran ETL dikontainerkan menggunakan Docker. File `docker-compose.yaml` mendef
 
 Anda dapat memodifikasi file Docker Compose untuk menambah atau menghapus layanan, mengubah alokasi sumber daya, atau mengonfigurasi jaringan sesuai kebutuhan.
 
-## Kontribusi
-Jika Anda ingin berkontribusi pada proyek ini, ikuti alur kerja Git standar:
-
-1. Fork repositori
-2. Buat cabang baru untuk perubahan Anda
-3. Buat perubahan Anda dan lakukan commit
-4. Dorong cabang Anda ke repositori yang diforkasi
-5. Kirimkan pull request ke repositori utama
