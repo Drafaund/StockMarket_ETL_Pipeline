@@ -1,96 +1,77 @@
-# StockMarket_ETL_Pipeline
-Sure, here's a README.md document that provides comprehensive documentation for the provided folder structure:
+# Pipa Saham ETL
+Repositori ini berisi file dan konfigurasi yang diperlukan untuk menyiapkan saluran ETL (Ekstrak, Transformasi, Muat) end-to-end untuk menganalisis data pasar saham dan sentimen berita.
 
-# Stockmarket ETL Pipeline
+## Struktur Folder
+Repositori ini terdiri dari folder dan file berikut:
 
-This repository contains the necessary files and configurations to set up an end-to-end ETL (Extract, Transform, Load) pipeline for analyzing stock market data and news sentiment.
+1. **config**: Folder ini berisi file konfigurasi untuk saluran ETL.
+2. **dags**: Folder ini berisi DAG (Directed Acyclic Graph) Airflow yang mendefinisikan alur kerja dan penjadwalan proses ETL.
+3. **ETL_env**: Folder ini berisi file konfigurasi lingkungan untuk proses ETL.
+4. **logs**: Folder ini menyimpan log yang dihasilkan selama eksekusi saluran ETL.
+5. **plugins**: Folder ini berisi plugin atau ekstensi kustom yang digunakan dalam pengaturan Airflow.
+6. `.dockerignore`: File yang menentukan file dan direktori yang harus diabaikan saat membangun gambar Docker.
+7. `.gitignore`: File yang menentukan file dan direktori yang harus diabaikan oleh Git.
+8. `docker-compose.yaml`: File Docker Compose yang mendefinisikan layanan dan kontainer untuk saluran ETL.
+9. `README.md`: File ini, yang menyediakan dokumentasi untuk proyek ini.
+10. `requirements.txt`: File yang mencantumkan dependensi Python yang diperlukan untuk saluran ETL.
 
-## Folder Structure
-
-The repository contains the following folders and files:
-
-1. **config**: This folder holds the configuration files for the pipeline.
-2. **dags**: This folder contains the Airflow DAGs (Directed Acyclic Graphs) that define the workflow and scheduling of the ETL process.
-3. **ETL_env**: This folder holds the environment configuration files for the ETL process.
-4. **logs**: This folder stores the logs generated during the ETL pipeline execution.
-5. **plugins**: This folder contains any custom plugins or extensions used in the Airflow setup.
-6. `.dockerignore`: A file that specifies which files and directories should be ignored when building the Docker image.
-7. `.gitignore`: A file that specifies which files and directories should be ignored by Git.
-8. `docker-compose.yaml`: A Docker Compose file that defines the services and containers for the ETL pipeline.
-9. `README.md`: This file, which provides documentation for the project.
-10. `requirements.txt`: A file that lists the Python dependencies required for the ETL pipeline.
-
-## Prerequisites
-
-Before you can set up the ETL pipeline, make sure you have the following installed on your system:
+## Prasyarat
+Sebelum Anda dapat menyiapkan saluran ETL, pastikan Anda memiliki perangkat berikut terinstal di sistem Anda:
 
 - Docker
 - Docker Compose
 - Python 3.x
 
-## Getting Started
-
-1. Clone the repository:
-
+## Memulai
+1. Klon repositori:
    ```
    git clone https://github.com/your-username/stockmarket-etl-pipeline.git
    ```
-
-2. Navigate to the project directory:
-
+2. Navigasi ke direktori proyek:
    ```
    cd stockmarket-etl-pipeline
    ```
-
-3. Build and run the Docker containers using Docker Compose:
-
+3. Buat dan jalankan kontainer Docker menggunakan Docker Compose:
    ```
    docker-compose up -d
    ```
+   Ini akan memulai penjadwal Airflow, server web, dan layanan lain yang diperlukan.
+4. Akses UI web Airflow dengan membuka browser web dan navigasi ke `http://localhost:8080`. Anda harus melihat DAG yang didefinisikan dalam folder `dags`.
+5. Jalankan saluran ETL dengan menonaktifkan jeda dan menjalankan DAG yang diinginkan.
 
-   This will start the Airflow scheduler, webserver, and other necessary services.
+## Konfigurasi
+File konfigurasi untuk saluran ETL terletak di folder `.env`. Anda dapat menyesuaikan pengaturan berikut:
 
-4. Access the Airflow web UI by opening a web browser and navigating to `http://localhost:8080`. You should see the DAGs defined in the `dags` folder.
+- **Kunci API Alpha Vantage**: Kunci API untuk mengakses API data saham Alpha Vantage.
+- **Kunci API Berita**: Kunci API untuk mengakses API data berita.
+- **Detail koneksi PostgreSQL**: Anda dapat langsung menghubungkan basis data Anda dengan Airflow di bagian Admin.
 
-5. Trigger the ETL pipeline by unpause and run the desired DAG.
+Perbarui file konfigurasi yang sesuai dengan kunci API dan kredensial basis data Anda sendiri.
 
-## Configuration
+## DAG Airflow
+DAG Airflow yang mendefinisikan alur kerja ETL terletak di folder `dags`. Setiap DAG mewakili aspek tertentu dari saluran, seperti:
 
-The configuration files for the ETL pipeline are located in the `config` folder. You can customize the following settings:
+- Mengekstrak data saham dari Alpha Vantage
+- Mengekstrak data berita dari API berita atau web scraping
+- Mentransformasi dan memproses data
+- Memuat data yang diproses ke dalam basis data PostgreSQL
 
-- **Alpha Vantage API key**: The API key for accessing the Alpha Vantage stock data API.
-- **News API key**: The API key for accessing the news data API.
-- **PostgreSQL connection details**: The connection details for the PostgreSQL database used to store the processed data.
+Anda dapat menyesuaikan DAG untuk memenuhi kebutuhan spesifik Anda, seperti menambahkan sumber data tambahan, memodifikasi logika transformasi, atau mengubah penjadwalan.
 
-Update the corresponding configuration files with your own API keys and database credentials.
+## Kontainer Docker
+Saluran ETL dikontainerkan menggunakan Docker. File `docker-compose.yaml` mendefinisikan layanan dan kontainer yang dibutuhkan untuk saluran ini, termasuk:
 
-## Airflow DAGs
+- Penjadwal dan server web Airflow
+- Basis data PostgreSQL
+- Layanan atau alat tambahan yang diperlukan untuk proses ETL
 
-The Airflow DAGs that define the ETL workflow are located in the `dags` folder. Each DAG represents a specific aspect of the pipeline, such as:
+Anda dapat memodifikasi file Docker Compose untuk menambah atau menghapus layanan, mengubah alokasi sumber daya, atau mengonfigurasi jaringan sesuai kebutuhan.
 
-- Extracting stock data from Alpha Vantage
-- Extracting news data from a news API or web scraping
-- Transforming and processing the data
-- Loading the processed data into the PostgreSQL database
+## Kontribusi
+Jika Anda ingin berkontribusi pada proyek ini, ikuti alur kerja Git standar:
 
-You can customize the DAGs to suit your specific requirements, such as adding additional data sources, modifying the transformation logic, or changing the scheduling.
-
-## Docker Containers
-
-The ETL pipeline is containerized using Docker. The `docker-compose.yaml` file defines the services and containers needed for the pipeline, including:
-
-- Airflow scheduler and webserver
-- PostgreSQL database
-- Any additional services or tools required for the ETL process
-
-You can modify the Docker Compose file to add or remove services, change resource allocations, or configure networking as needed.
-
-## Contribution
-
-If you would like to contribute to this project, please follow the standard Git workflow:
-
-1. Fork the repository
-2. Create a new branch for your changes
-3. Make your changes and commit them
-4. Push your branch to your forked repository
-5. Submit a pull request to the main repository
+1. Fork repositori
+2. Buat cabang baru untuk perubahan Anda
+3. Buat perubahan Anda dan lakukan commit
+4. Dorong cabang Anda ke repositori yang diforkasi
+5. Kirimkan pull request ke repositori utama
